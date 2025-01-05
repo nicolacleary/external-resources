@@ -13,5 +13,5 @@ build_qa: .venv
 	.venv/bin/pytest tests
 
 
-build_wheel: .venv
+build: .venv
 	.venv/bin/python -m build --wheel
