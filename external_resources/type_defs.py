@@ -16,7 +16,7 @@ class ExternalResourceUnavailable(Exception):
 
 
 @pydantic_dataclass
-class IsResource(Generic[T_UseArgs, V_UseOutput], metaclass=ABCMeta):
+class Resource(Generic[T_UseArgs, V_UseOutput], metaclass=ABCMeta):
     @abstractmethod
     def throw_if_unavailable(self) -> None:
         """
