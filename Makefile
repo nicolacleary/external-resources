@@ -1,7 +1,7 @@
 .venv:
 	python -m venv .venv
 	.venv/bin/pip install --upgrade pip
-	.venv/bin/pip install -e .[dev]
+	.venv/bin/pip install -e .[dev,build]
 
 
 build_qa: .venv
@@ -13,6 +13,5 @@ build_qa: .venv
 	.venv/bin/pytest tests
 
 
-# TODO
-build_wheel:
-	echo "TODO"
+build_wheel: .venv
+	.venv/bin/python -m build --wheel

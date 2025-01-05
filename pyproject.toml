@@ -12,6 +12,9 @@ dev = [
     "pytest",
     "ruff",
 ]
+wheel = [
+    "build",
+]
 
 [tool.setuptools.packages.find]
 include = ["external_resources"]
