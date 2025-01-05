@@ -1,6 +1,10 @@
 import subprocess
 
-from external_resources.executables.type_defs import ExecutablePath, ExecutableUseArgs, ExecutableUseValue
+from external_resources.executables.type_defs import (
+    ExecutablePath,
+    ExecutableUseArgs,
+    ExecutableUseValue,
+)
 from external_resources.type_defs import IsResource, ExternalResourceUnavailable
 
 

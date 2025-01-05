@@ -2,7 +2,11 @@ from pathlib import Path
 
 import pytest
 
-from external_resources.executables import Executable, executable_type_defs, GitExecutable
+from external_resources.executables import (
+    Executable,
+    executable_type_defs,
+    GitExecutable,
+)
 from external_resources.type_defs import ExternalResourceUnavailable
 
 
@@ -36,7 +40,10 @@ class TestNonExistant:
         """
         We should never get into a state where we get a valid response from a reso
         """
-        with pytest.raises(ExternalResourceUnavailable, match="Executable path does not exist: i.do.not.exist"):
+        with pytest.raises(
+            ExternalResourceUnavailable,
+            match="Executable path does not exist: i.do.not.exist",
+        ):
             some_executable.use(args=executable_type_defs.ExecutableUseArgs(args=["--blah"]))
 
 
