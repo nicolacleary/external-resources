@@ -1,0 +1,24 @@
+name: Makefile CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Create venv
+      run: make .venv
+
+    - name: Run linting, formatting, tests
+      run: make build_qa
+
+    - name: Build wheel
+      run: make build
