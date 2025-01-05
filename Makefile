@@ -4,13 +4,10 @@
 	.venv/bin/pip install .[dev]
 
 
-# TODO - verfiy
-build_qa:
-	# TODO - replace with ruff
-	.venv/bin/flake8 external_resources tests \
-		--max-line-length 120
-	.venv/bin/black external_resources tests \
-		--line-length 120 --check
+build_qa: .venv
+	.venv/bin/ruff check external_resources tests
+	.venv/bin/ruff format external_resources tests \
+		--check --line-length 120
 	.venv/bin/mypy external_resources tests \
 		--strict
 	.venv/bin/pytest tests

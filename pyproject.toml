@@ -8,10 +8,9 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "black",
-    "flake8",
     "mypy",
     "pytest",
+    "ruff",
 ]
 
 [tool.setuptools.packages.find]
