@@ -1,7 +1,7 @@
 .venv:
 	python -m venv .venv
 	.venv/bin/pip install --upgrade pip
-	.venv/bin/pip install .[dev]
+	.venv/bin/pip install -e .[dev]
 
 
 build_qa: .venv
