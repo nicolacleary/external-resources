@@ -1,0 +1,18 @@
+[project]
+name = "external-resources"
+version = "0.0.1"
+
+dependencies = [
+    "pydantic",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "flake8",
+    "mypy",
+    "pytest",
+]
+
+[tool.setuptools.packages.find]
+include = ["external_resources"]

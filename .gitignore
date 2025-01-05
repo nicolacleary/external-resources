@@ -1,0 +1,9 @@
+.venv-python-3.10
+*.egg-info
+__pycache__
+*.pyc
+data
+.venv
+
+#tmp
+code_ref
