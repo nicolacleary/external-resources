@@ -11,7 +11,8 @@ build_qa:
 		--max-line-length 120
 	.venv/bin/black external_resources tests \
 		--line-length 120 --check
-	.venv/bin/mypy external_resources tests
+	.venv/bin/mypy external_resources tests \
+		--strict
 	.venv/bin/pytest tests
 
 
