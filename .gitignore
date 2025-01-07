@@ -5,5 +5,8 @@ __pycache__
 data
 .venv
 
+build
+dist
+
 #tmp
 code_ref
