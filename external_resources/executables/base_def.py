@@ -5,10 +5,10 @@ from external_resources.executables.type_defs import (
     ExecutableUseArgs,
     ExecutableUseValue,
 )
-from external_resources.type_defs import IsResource, ExternalResourceUnavailable
+from external_resources.type_defs import Resource, ExternalResourceUnavailable
 
 
-class Executable(IsResource[ExecutableUseArgs, ExecutableUseValue]):
+class Executable(Resource[ExecutableUseArgs, ExecutableUseValue]):
     executable_path: ExecutablePath
     validation_args: list[str] = ["--version"]
 

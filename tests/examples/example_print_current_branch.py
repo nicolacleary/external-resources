@@ -1,15 +1,16 @@
 # To run: "python tests/examples/Example_print_current_branch.py"
 
-from external_resources.executables import GitExecutable, executable_type_defs
+from external_resources.executables import Executable, GitExecutable, executable_type_defs
+from external_resources.resource_managers import ResourceManager, validate_resources_on_declaration
 
 
-# TODO - add manager to handle initial checks?
-GIT = GitExecutable()
-GIT.throw_if_unavailable()
+@validate_resources_on_declaration
+class Executables(ResourceManager[Executable]):
+    GIT = GitExecutable()
 
 
 def get_current_branch() -> str:
-    r = GIT.use(executable_type_defs.ExecutableUseArgs(args=["branch"]))
+    r = Executables.GIT.use(executable_type_defs.ExecutableUseArgs(args=["branch"]))
     assert r.return_code == 0
     lines = r.stdout.split("\n")
     for line in lines:
