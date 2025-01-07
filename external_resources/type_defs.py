@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from typing import Generic, TypeVar
+from typing import Any, Generic, TypeVar, Protocol
 
 from pydantic import BaseModel
 from pydantic.dataclasses import dataclass as pydantic_dataclass
@@ -50,3 +50,9 @@ class Resource(Generic[T_UseArgs, V_UseOutput], metaclass=ABCMeta):
         """
         self.throw_if_unavailable()
         return self._use(args)
+
+
+class IsResource(Protocol):
+    def throw_if_unavailable(self) -> None: ...
+
+    def use(self, args: Any) -> Any: ...
