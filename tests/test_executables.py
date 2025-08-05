@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import pytest
+from pydantic.dataclasses import dataclass as pydantic_dataclass
 
 from external_resources.executables import (
     Executable,
@@ -10,8 +11,11 @@ from external_resources.executables import (
 from external_resources.type_defs import ExternalResourceUnavailable
 
 
+@pydantic_dataclass
 class SomeNonExistantExecutable(Executable):
-    executable_path = executable_type_defs.ExecutablePath(Path("i/do/not/exist"))
+    executable_path: executable_type_defs.ExecutablePath = executable_type_defs.ExecutablePath(
+        Path("i/do/not/exist"), skip_exists_check=False
+    )
 
 
 @pytest.fixture(scope="module")

@@ -1,5 +1,8 @@
 import subprocess
 
+from pydantic import Field
+from pydantic.dataclasses import dataclass as pydantic_dataclass
+
 from external_resources.executables.type_defs import (
     ExecutablePath,
     ExecutableUseArgs,
@@ -8,9 +11,10 @@ from external_resources.executables.type_defs import (
 from external_resources.type_defs import Resource, ExternalResourceUnavailable
 
 
+@pydantic_dataclass
 class Executable(Resource[ExecutableUseArgs, ExecutableUseValue]):
     executable_path: ExecutablePath
-    validation_args: list[str] = ["--version"]
+    validation_args: list[str] = Field(default_factory=lambda: ["--version"])
 
     def _form_args(self, arg_list: list[str]) -> list[str]:
         return [self.executable_path.as_str, *arg_list]
