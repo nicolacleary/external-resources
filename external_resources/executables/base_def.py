@@ -14,13 +14,15 @@ from external_resources.type_defs import Resource, ExternalResourceUnavailable
 @pydantic_dataclass
 class Executable(Resource[ExecutableUseArgs, ExecutableUseValue]):
     executable_path: ExecutablePath
-    validation_args: list[str] = Field(default_factory=lambda: ["--version"])
+    validation_args: list[str] | None = Field(default_factory=lambda: ["--version"])
 
     def _form_args(self, arg_list: list[str]) -> list[str]:
         return [self.executable_path.as_str, *arg_list]
 
     @property
-    def _full_validation_args(self) -> list[str]:
+    def _full_validation_args(self) -> list[str] | None:
+        if self.validation_args is None:
+            return None
         return self._form_args(self.validation_args)
 
     def throw_if_unavailable(self) -> None:
@@ -31,6 +33,10 @@ class Executable(Resource[ExecutableUseArgs, ExecutableUseValue]):
             validation_args = self._full_validation_args
         except ValueError as err:
             raise ExternalResourceUnavailable(str(err))
+
+        if validation_args is None:
+            return None
+
         result = subprocess.run(
             args=validation_args,
             capture_output=True,
